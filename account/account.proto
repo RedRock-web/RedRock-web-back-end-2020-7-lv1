@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package account;
+
+service server {
+    rpc register (account) returns (statusWithData) {
+    }
+    rpc login (account) returns (statusWithData) {
+    }
+    rpc modifyInfo (Info) returns (statusWithInfo) {
+    }
+    rpc getInfo (nullData) returns (Info) {
+    }
+
+}
+
+message account {
+    string username = 1;
+    string password = 2;
+}
+
+// 返回是否注册的信息, 0 注册成功，1 表注册失败
+message statusWithData {
+    int32 is_registered = 1;
+    string data = 2;
+}
+
+message Info {
+    string username = 1;
+    string password = 2;
+    string nickname = 3;
+    int32 age = 4;
+    string gender = 5;
+}
+
+message nullData {
+
+}
+
+
+message statusWithInfo {
+    string status = 1;
+    Info info = 2;
+}
