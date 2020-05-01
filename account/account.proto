@@ -9,7 +9,7 @@ service server {
     }
     rpc modifyInfo (Info) returns (statusWithInfo) {
     }
-    rpc getInfo (nullData) returns (Info) {
+    rpc getInfo (username) returns (Info) {
     }
 
 }
@@ -33,10 +33,9 @@ message Info {
     string gender = 5;
 }
 
-message nullData {
-
+message username {
+    string username = 1;
 }
-
 
 message statusWithInfo {
     string status = 1;
