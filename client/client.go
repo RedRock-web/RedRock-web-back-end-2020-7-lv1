@@ -10,12 +10,12 @@ import (
 )
 
 const (
-	//remoteAddress     = "47.98.57.152:1234"
-	localAddress = "127.0.0.1:1234"
+	remoteAddress = "47.98.57.152:1234"
+	//localAddress = "127.0.0.1:1234"
 )
 
 func main() {
-	conn, err := grpc.Dial(localAddress, grpc.WithInsecure(), grpc.WithBlock())
+	conn, err := grpc.Dial(remoteAddress, grpc.WithInsecure(), grpc.WithBlock())
 
 	if err != nil {
 		errors.New("1")
