@@ -2,6 +2,7 @@ package database
 
 import (
 	"errors"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
@@ -15,29 +16,25 @@ type Account struct {
 	Username string
 	Password string
 	Nickname string
-	Age      int
+	Age      int32
 	Gender   string
 }
 
-type Db struct {
-}
-
 func Start() {
-	d := Db{}
-	d.Connet()
-	d.CreateTable()
+	ConnetDb()
+	CreateTable()
 }
 
-func (d *Db) Connet() {
+func ConnetDb() {
 	db, err := gorm.Open("mysql", "root:mima@/rpc_test?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		log.Fatalln(err)
-		errors.New("open database failed!")
+		fmt.Println("open database failed!")
 	}
 	G_db = db
 }
 
-func (d *Db) CreateTable() {
+func CreateTable() {
 	if G_db == nil {
 		errors.New("G_db is nil!")
 		return
@@ -47,4 +44,13 @@ func (d *Db) CreateTable() {
 	} else {
 		G_db.CreateTable(&Account{})
 	}
+}
+
+type Address struct {
+	Street string
+	City   string
+}
+type Person struct {
+	Name     string
+	Location Address
 }
